@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "bun run --filter open-webcontainer build && vite build",
     "preview": "vite preview",
     "test": "bun test",
     "typecheck": "vue-tsc -b"

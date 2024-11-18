@@ -21,5 +21,5 @@ busybox-wasm:
 	PATH=$(CURDIR)/build/wasm:$$PATH $(MAKE) -C build/wasm ARCH=em CROSS_COMPILE=em SKIP_STRIP=y
 
 runtime: busybox-wasm
-	cp build/wasm/busybox_unstripped.js ../src/assets/
-	cp build/wasm/busybox_unstripped.wasm ../src/assets/
+	cp build/wasm/busybox_unstripped.js ../../src/assets/
+	cp build/wasm/busybox_unstripped.wasm ../../src/assets/

@@ -8,7 +8,7 @@ Develop the web in the web. This project provides a runtime to run Node.js proje
   - conforms to the [webcontainer api](https://webcontainers.io/api)
 
 - **Virtual File system**
-  - based on [memfs](https://github.com/streamich/memfs)
+  - based on [zenfs](https://github.com/zen-fs/core)
 
 - **Process management**
   - fork / clone processes
@@ -19,7 +19,7 @@ Develop the web in the web. This project provides a runtime to run Node.js proje
 
 - **Shell Environment**
   - a shell written in javascript
-  - supports: `ls`, `cat`, `echo`, `touch`, `rm`, `cd`, `cp`, `mv`, `pwd`, `env`, `exit`, `true`, `false`, `history`, `clear`, `xdg-open`, `wget`
+  - supports: `ls`, `cat`, `echo`, `touch`, `rm`, `cd`, `cp`, `mv`, `pwd`, `env`, `exit`, `true`, `false`, `history`, `clear`, `xdg-open`, `wget`, `unzip`
   - auto-completion for commands, aliases & paths
   - execute commands in `PATH`
 
@@ -35,15 +35,19 @@ Develop the web in the web. This project provides a runtime to run Node.js proje
 
 ```bash
 .
-├── public
-├── runtime # a busybox emscripten build
-└── src
-    ├── assets
-    ├── components
-    ├── compositions
-    ├── sandbox # webcontainer api
-    │   └── commands # jsh commands
-    └── test # playground to test new features
+├── packages
+│   ├── core # webcontainer runtime
+│   │   └── src
+│   │       └── shell # shell environment
+│   │           └── commands # shell commands
+│   └── playground
+│       ├── public # public files
+│       └── src
+│           ├── assets # static assets
+│           ├── components # vue components
+│           └── compositions # vue compositions
+└── testing
+    └── busybox # emscripten compiled busybox
 ```
 
 ## 🛠️ Development
@@ -60,13 +64,10 @@ bun dev
 
 ## TODO
 
-- [ ] split project into packages
-  - [ ] webcontainer
-  - [ ] jsh
-  - [ ] playground
 - [ ] networking
   - [x] add service worker to intercept requests
   - [ ] clean way to initialize service worker first time (load files somehow)
+  - [ ] polyfill `node:net` and `node:http` modules
   - [ ] tcp/ip stack using sth like ([IwIP](https://savannah.nongnu.org/projects/lwip/))
   - [ ] support http requests
   - [ ] support websockets
@@ -100,6 +101,7 @@ bun dev
 
 ## 🤝 Acknowledgments
 
+- [zenfs](https://github.com/zen-fs/core)
 - [memfs](https://github.com/streamich/memfs)
 - [webcontainers](https://webcontainers.io)
 - [busybox](https://busybox.net)
