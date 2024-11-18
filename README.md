@@ -1,65 +1,116 @@
 # Nano web IDE
 
-Develop the web in the web.
+Develop the web in the web. This project provides a runtime to run Node.js projects completely in the browser by mocking internals like `process`. In addition it includes a shell written in javascript to run commands like `ls` or `cd` and a playground to test those features.
+
+## 🚀 Features
+
+- **Webcontainer compatible api**
+  - conforms to the [webcontainer api](https://webcontainers.io/api)
+
+- **Virtual File system**
+  - based on [memfs](https://github.com/streamich/memfs)
+
+- **Process management**
+  - fork / clone processes
+  - pid management
+  - `/proc` file system
+  - get process exit code
+  - node.js compatible [process object](https://nodejs.org/api/process.html)
+
+- **Shell Environment**
+  - a shell written in javascript
+  - supports: `ls`, `cat`, `echo`, `touch`, `rm`, `cd`, `cp`, `mv`, `pwd`, `env`, `exit`, `true`, `false`, `history`, `clear`, `xdg-open`, `wget`
+  - auto-completion for commands, aliases & paths
+  - execute commands in `PATH`
+
+- **Networking**
+  - service worker to intercept requests
+
+- **Playground**
+  - file explorer
+  - file editor
+  - terminals to run commands
+
+## 📦 Project Structure
+
+```bash
+.
+├── public
+├── runtime # a busybox emscripten build
+└── src
+    ├── assets
+    ├── components
+    ├── compositions
+    ├── sandbox # webcontainer api
+    │   └── commands # jsh commands
+    └── test # playground to test new features
+```
+
+## 🛠️ Development
+
+```bash
+# install dependencies
+bun install
+
+# start dev server
+bun dev
+
+# visit http://localhost:5173
+```
 
 ## TODO
 
-- [x] show fs in tree view
-- [x] allow to open files from fs in editor
-- [x] fix cwd updating
-- [ ] run scripts from fs using terminal
-  - [x] use PATH to find executables
-  - [ ] spawn processes somehow (workers?)
-- [ ] add piping between processes
-- [x] add process stdin/stdout/stderr
-- [x] add process exit code
-- [x] save files from editor
-- [x] file watch editor file
-- [ ] use split-panes for editor and terminal
-- [ ] fix input buffer when moving cursor in terminal
-- [ ] store fs somewhere
-- [ ] add service worker to intercept requests and serve fs
-- [ ] save open file path to local storage
-- [ ] click open file should be emit
-- [x] highlight open file in tree view
-- [x] fix auto-completion
-  - [x] add completions for paths
-- [x] use more advanced editor
-  - [x] add syntax highlighting
-- [x] use spawn for jsh commands
-- [x] add jsh commands
-  - [x] ls
-  - [x] cat
-  - [x] echo
-  - [x] touch
-  - [x] rm
+- [ ] split project into packages
+  - [ ] webcontainer
+  - [ ] jsh
+  - [ ] playground
+- [ ] networking
+  - [x] add service worker to intercept requests
+  - [ ] clean way to initialize service worker first time (load files somehow)
+  - [ ] tcp/ip stack using sth like ([IwIP](https://savannah.nongnu.org/projects/lwip/))
+  - [ ] support http requests
+  - [ ] support websockets
+- [ ] process management
+  - [ ] spawn isolated processes using mocked process object (workers?)
+- [x] jsh
+  - [ ] allow to run script files from fs
+  - [ ] fix input buffer when moving cursor in terminal
+  - [ ] support `&&` and `||` operators
+  - [ ] support `>>` and `>`
+  - [ ] support `|`
+  - [ ] add shebang support
+- [x] jsh commands
   - [ ] rm -r
-  - [ ] mkdir
-  - [x] cd
-  - [x] cp
+  - [ ] mkdir -p
   - [ ] cp -r
-  - [x] mv
-  - [x] pwd
   - [ ] which
-  - [x] env
   - [ ] export
-  - [x] exit
   - [ ] sleep
-  - [x] true
-  - [x] false
   - [ ] alias
-  - [x] history
-  - [x] clear
   - [ ] curl
-  - [x] xdg-open (open)
-  - [ ] wasm by using wasmer
+- [ ] external commands
+  - [ ] wasm (using wasmer)
   - [ ] node
-  - [ ] python by using wasmer
+  - [ ] python (using wasmer)
   - [ ] pnpm
   - [ ] npm
   - [ ] yarn
-- [ ] jsh
-  - [ ] allow to run script files
-  - [ ] add shebang support
-  - [ ] support && and || operators
-  - [ ] support pipes
+- [ ] playground
+  - [ ] allow to persist fs (download or api)
+
+## 🤝 Acknowledgments
+
+- [memfs](https://github.com/streamich/memfs)
+- [webcontainers](https://webcontainers.io)
+- [busybox](https://busybox.net)
+- [emscripten](https://emscripten.org)
+- [wasmer](https://wasmer.io)
+- [xterm.js](https://xtermjs.org)
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Similar projects
+
+- [OpenWebContainer](https://github.com/thecodacus/OpenWebContainer) (Thanks for the README template)
