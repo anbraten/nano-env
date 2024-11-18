@@ -11,63 +11,67 @@ export class Kernel {
   constructor(options: { fs: FS }) {
     this.fs = options.fs;
 
-    //     this.fs.fromJSON(
-    //       {
-    //         '/etc/os-release':
-    //           `
-    // PRETTY_NAME = "Ubuntu 20.04.0 LTS"
-    // NAME = "Ubuntu"
-    // VERSION_ID = "20.04"
-    // VERSION = "20.04.0 LTS (Focal Fossa)"
-    // VERSION_CODENAME = focal
-    // ID = ubuntu
-    // ID_LIKE = debian
-    // HOME_URL = "https://www.ubuntu.com/"
-    // SUPPORT_URL = "https://help.ubuntu.com/"
-    // BUG_REPORT_URL = "https://bugs.launchpad.net/ubuntu/"
-    // PRIVACY_POLICY_URL = "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-    // UBUNTU_CODENAME = focal
-    // `.trim() + '\n',
-    //         '/etc/shells':
-    //           `
-    // /bin/jsh
-    // /bin/zsh
-    // /bin/bash
-    // /bin/sh
-    // `.trim() + '\n',
-    //         '/etc/lsb-release':
-    //           `
-    // DISTRIB_ID=Ubuntu
-    // DISTRIB_RELEASE=20.04
-    // DISTRIB_CODENAME=focal
-    // DISTRIB_DESCRIPTION="Ubuntu 20.04.0 LTS"
-    // `.trim() + '\n',
-    //         '/etc/passwd':
-    //           `
-    // 0:root
-    // 1:staff
-    // `.trim() + '\n',
-    //         '/home/project': null,
-    //         '/dev/null': '',
-    //         '/dev/urandom': '',
-    //         '/dev/tty': '',
-    //         '/dev/ttys001': '',
-    //         '/dev/ttys002': '',
-    //         '/dev/ttys003': '',
-    //         '/dev/ttys004': '',
-    //         '/bin': null,
-    //         '/tmp': null,
-    //         '/usr': null,
-    //         '/proc': null,
-    //       },
-    //       '/'
-    //     );
-
+    this.fs.mkdirSync('/etc');
+    this.fs.mkdirSync('/dev');
     this.fs.mkdirSync('/proc');
     this.fs.mkdirSync('/bin');
     this.fs.mkdirSync('/usr');
     this.fs.mkdirSync('/tmp');
     this.fs.mkdirSync('/home/project', { recursive: true });
+
+    this.fs.writeFileSync(
+      '/etc/os-release',
+      `
+PRETTY_NAME = "Ubuntu 20.04.0 LTS"
+NAME = "Ubuntu"
+VERSION_ID = "20.04"
+VERSION = "20.04.0 LTS (Focal Fossa)"
+VERSION_CODENAME = focal
+ID = ubuntu
+ID_LIKE = debian
+HOME_URL = "https://www.ubuntu.com/"
+SUPPORT_URL = "https://help.ubuntu.com/"
+BUG_REPORT_URL = "https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL = "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME = focal
+    `.trim()
+    );
+
+    this.fs.writeFileSync(
+      '/etc/shells',
+      `
+/bin/jsh
+/bin/zsh
+/bin/bash
+/bin/sh
+    `.trim()
+    );
+
+    this.fs.writeFileSync(
+      '/etc/lsb-release',
+      `
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION="Ubuntu 20.04.0 LTS"
+    `.trim()
+    );
+
+    this.fs.writeFileSync(
+      '/etc/passwd',
+      `
+0:root
+1:staff
+    `.trim()
+    );
+
+    this.fs.writeFileSync('/dev/null', '');
+    this.fs.writeFileSync('/dev/urandom', '');
+    this.fs.writeFileSync('/dev/tty', '');
+    this.fs.writeFileSync('/dev/ttys001', '');
+    this.fs.writeFileSync('/dev/ttys002', '');
+    this.fs.writeFileSync('/dev/ttys003', '');
+    this.fs.writeFileSync('/dev/ttys004', '');
 
     let cwd = '/';
     this.initProcess = this.createProcess({
