@@ -1,6 +1,6 @@
 import type { InjectionKey, Ref } from 'vue';
 import { inject as vueInject, provide as vueProvide } from 'vue';
-import { Sandbox } from '../sandbox/sandbox';
+import { Sandbox } from 'open-webcontainer';
 
 interface InjectKeys {
   sandbox: () => Sandbox;

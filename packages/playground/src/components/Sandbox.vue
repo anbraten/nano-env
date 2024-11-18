@@ -6,8 +6,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { provide } from '../compositions/injectProvide';
-import { Sandbox } from '../sandbox/sandbox';
-import { FileSystemTree } from '../sandbox/fs';
+import { type FileSystemTree, Sandbox } from 'open-webcontainer';
 
 const sandbox = ref<Sandbox>();
 provide('sandbox', () => {

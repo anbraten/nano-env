@@ -2,7 +2,9 @@
   "name": "@open-webcontainer/root",
   "private": true,
   "scripts": {
-    "dev": "bun run --filter '*' dev"
+    "dev": "bun run --filter '*' dev",
+    "build": "bun run --filter '*' build",
+    "test": "bun run --filter '*' test"
   },
   "devDependencies": {
     "@types/bun": "latest"

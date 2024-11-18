@@ -26,16 +26,4 @@ export default defineConfig({
       // 'Cross-Origin-Embedder-Policy': 'require-corp',
     },
   },
-  resolve: {
-    alias: {
-      fs: 'memfs',
-      path: 'path-browserify',
-      process: 'process/browser',
-      buffer: 'buffer/',
-    },
-  },
-  define: {
-    // Required for some Node shims
-    global: 'globalThis',
-  },
 });
