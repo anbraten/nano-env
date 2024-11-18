@@ -1,0 +1,4 @@
+#!/bin/bash
+# Wrapper script for emcc
+#export EM_CONFIG=/emsdk/upstream/emscripten
+exec emcc "$@"

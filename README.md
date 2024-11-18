@@ -1,0 +1,65 @@
+# Nano web IDE
+
+Develop the web in the web.
+
+## TODO
+
+- [x] show fs in tree view
+- [x] allow to open files from fs in editor
+- [x] fix cwd updating
+- [ ] run scripts from fs using terminal
+  - [x] use PATH to find executables
+  - [ ] spawn processes somehow (workers?)
+- [ ] add piping between processes
+- [x] add process stdin/stdout/stderr
+- [x] add process exit code
+- [x] save files from editor
+- [x] file watch editor file
+- [ ] use split-panes for editor and terminal
+- [ ] fix input buffer when moving cursor in terminal
+- [ ] store fs somewhere
+- [ ] add service worker to intercept requests and serve fs
+- [ ] save open file path to local storage
+- [ ] click open file should be emit
+- [x] highlight open file in tree view
+- [x] fix auto-completion
+  - [x] add completions for paths
+- [x] use more advanced editor
+  - [x] add syntax highlighting
+- [x] use spawn for jsh commands
+- [x] add jsh commands
+  - [x] ls
+  - [x] cat
+  - [x] echo
+  - [x] touch
+  - [x] rm
+  - [ ] rm -r
+  - [ ] mkdir
+  - [x] cd
+  - [x] cp
+  - [ ] cp -r
+  - [x] mv
+  - [x] pwd
+  - [ ] which
+  - [x] env
+  - [ ] export
+  - [x] exit
+  - [ ] sleep
+  - [x] true
+  - [x] false
+  - [ ] alias
+  - [x] history
+  - [x] clear
+  - [ ] curl
+  - [x] xdg-open (open)
+  - [ ] wasm by using wasmer
+  - [ ] node
+  - [ ] python by using wasmer
+  - [ ] pnpm
+  - [ ] npm
+  - [ ] yarn
+- [ ] jsh
+  - [ ] allow to run script files
+  - [ ] add shebang support
+  - [ ] support && and || operators
+  - [ ] support pipes
