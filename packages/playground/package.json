@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "test": "bun test"
+    "test": "bun test",
+    "typecheck": "vue-tsc -b"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.2",
