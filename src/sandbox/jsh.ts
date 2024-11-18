@@ -144,6 +144,8 @@ export class JSH {
   private async handleInput(data: string) {
     // TODO: forward to command when one is currently running
 
+    console.log(data);
+
     switch (data) {
       case '\r': // Enter
         this.handleCommand();
@@ -173,9 +175,11 @@ export class JSH {
         this.write(this.getPrompt());
         this.write(this.currentInputBuffer);
         break;
-      case '': // ctrl-a
+      case '\u0001': // Ctrl-A (move to beginning of line)
+        alert('ctrl-a');
         break;
-      case '': // ctrl-e
+      case '\u0005': // Ctrl-E (move to end of line)
+        alert('ctrl-e');
         break;
       case '\t': // Tab
         this.handleTab();
