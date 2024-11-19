@@ -70,7 +70,9 @@ export class JSH {
   }
 
   private debug(...args: any[]) {
-    this.kernel.debug('jsh', ...args);
+    if (globalThis.DEBUG) {
+      console.log('jsh', ...args);
+    }
   }
 
   private async loadJshrc() {
@@ -480,14 +482,5 @@ export class JSH {
     // return this.exitCode;
 
     return 0;
-  }
-
-  private getSession() {
-    return {
-      cwd: this.process.cwd(),
-      env: this.env,
-      lastExitCode: this.lastExitCode,
-      commandHistory: this.commandHistory,
-    };
   }
 }
