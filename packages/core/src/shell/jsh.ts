@@ -256,7 +256,7 @@ export class JSH {
 
       let process: Process;
       if (command.builtin) {
-        process = this.kernel.clone(this.process, {
+        process = await this.kernel.clone(this.process, {
           argv: [cmd, ...args],
           argv0: cmd,
           title: cmd,
@@ -267,7 +267,7 @@ export class JSH {
           },
         });
       } else {
-        process = this.kernel.fork(this.process, {
+        process = await this.kernel.fork(this.process, {
           argv: [cmd, ...args],
           argv0: cmd,
           title: cmd,

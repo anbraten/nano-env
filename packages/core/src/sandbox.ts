@@ -1,4 +1,4 @@
-import { fs } from '@zenfs/core';
+import { fs as ZenFS } from '@zenfs/core';
 import {
   FileSystemApi,
   type FileSystemTree,
@@ -14,12 +14,11 @@ import { Kernel } from './kernel';
 export class Sandbox {
   private _fs: FileSystemApi;
   private _volume: FS;
-  private _kernel: Kernel;
+  private _kernel!: Kernel;
 
-  private constructor() {
+  private constructor({ fs }: { fs: FS }) {
     this._volume = fs;
-    this._fs = new FileSystemApi(this._volume);
-    this._kernel = new Kernel({ fs: this._volume });
+    this._fs = new FileSystemApi(fs);
   }
 
   public get fs(): FileSystemApi {
@@ -35,7 +34,9 @@ export class Sandbox {
   }
 
   static async boot() {
-    const sandbox = new Sandbox();
+    const fs = ZenFS;
+    const sandbox = new Sandbox({ fs });
+    sandbox._kernel = await Kernel.init({ fs });
     return sandbox;
   }
 
@@ -100,7 +101,7 @@ export class Sandbox {
     >();
 
     if (command === 'jsh') {
-      const process = this._kernel.fork(this._kernel.initProcess, {
+      const process = await this._kernel.fork(this._kernel.initProcess, {
         argv0: command,
         argv: args,
         stdin: stdinOut,
